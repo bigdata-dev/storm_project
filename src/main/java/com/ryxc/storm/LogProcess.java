@@ -1,6 +1,6 @@
-package cn.crxy.storm_project;
+package com.ryxc.storm;
 
-import cn.crxy.storm_project.bolt.LogFilterBolt;
+import com.ryxc.storm.bolt.LogFilterBolt;
 import storm.kafka.BrokerHosts;
 import storm.kafka.KafkaSpout;
 import storm.kafka.SpoutConfig;
