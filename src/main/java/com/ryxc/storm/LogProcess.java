@@ -13,7 +13,7 @@ public class LogProcess {
 	
 	public static void main(String[] args) {
 		TopologyBuilder topologyBuilder = new TopologyBuilder();
-		BrokerHosts hosts = new ZkHosts("hh165.all123.net:2181");//指定kafka的地址,在这通过zk的地址间接获取
+		BrokerHosts hosts = new ZkHosts("192.168.116.161:2181");//指定kafka的地址,在这通过zk的地址间接获取
 		String topic = "spider";//kafka中创建的主题
 		String zkRoot = "/kafkaspout";//其实就是在zk中指定一个根节点，后续会在这个节点中创建一个子节点保存storm消费kafka中数据的偏移量等信息
 		String id = "123";//kafka的消费groupid
