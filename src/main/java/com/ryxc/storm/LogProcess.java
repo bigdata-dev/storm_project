@@ -1,5 +1,9 @@
 package com.ryxc.storm;
 
+import backtype.storm.StormSubmitter;
+import backtype.storm.generated.AlreadyAliveException;
+import backtype.storm.generated.InvalidTopologyException;
+import backtype.storm.generated.StormTopology;
 import com.ryxc.storm.bolt.LogFilterBolt;
 import storm.kafka.BrokerHosts;
 import storm.kafka.KafkaSpout;
@@ -25,8 +29,20 @@ public class LogProcess {
 		
 		LocalCluster localCluster = new LocalCluster();
 		String topology_name = LogProcess.class.getSimpleName();
-		localCluster.submitTopology(topology_name, new Config(), topologyBuilder.createTopology());
-		
+        Config config = new Config();
+        StormTopology topology = topologyBuilder.createTopology ();
+        if(args.length==0){
+            localCluster.submitTopology(topology_name, config, topology);
+		}else{
+            try {
+                StormSubmitter.submitTopology(topology_name,config,topology);
+            } catch (AlreadyAliveException e) {
+                e.printStackTrace ();
+            } catch (InvalidTopologyException e) {
+                e.printStackTrace ();
+            }
+        }
+
 		
 	}
 
